@@ -10,6 +10,16 @@ interface ISlider {
   image: string;
 }
 
+type Product = {
+  id: number;
+  title: string;
+  desc?: string;
+  img?: string;
+  price: number;
+  options?: { title: string; additionalPrice: number }[];
+};
+
+
 export const links: ILlink[] = [
   { id: 1, title: "Homepage", url: "/" },
   { id: 2, title: "Menu", url: "/menu" },

@@ -1,6 +1,6 @@
 "use client";
 
-import { links } from "@/links/Links";
+import { links } from "@/links/links";
 import CartPage from "@/app/cart/page";
 import Image from "next/image";
 import Link from "next/link";

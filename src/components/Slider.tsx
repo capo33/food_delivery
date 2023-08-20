@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { dataSlider } from "@/links/Links";
+import { dataSlider } from "@/links/links";
 import Image from "next/image";
 
 const Slider = () => {
