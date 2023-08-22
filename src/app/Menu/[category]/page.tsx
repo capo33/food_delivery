@@ -7,7 +7,7 @@ import React from "react";
 // get single category
 const getCategory = async (category: string) => {
   const response = await fetch(
-    `http://localhost:3000/api/product?category=${category}`
+    `http://localhost:3000/api/products?category=${category}`
   );
 
   if (!response.ok) {

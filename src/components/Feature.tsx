@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 
 const getFeaturedProducts = async () => {
-  const response = await fetch("http://localhost:3000/api/product", {
+  const response = await fetch("http://localhost:3000/api/products", {
     cache: "no-store",
   });
 
