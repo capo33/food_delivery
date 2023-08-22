@@ -9,3 +9,34 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Category {
+  id String  @id @default(cuid())
+  createdAt DateTime @default(now())
+  title String
+  desc String
+  img String 
+  slug String @unique
+  products Product[] 
+}
+
+model Product {
+  id String  @id @default(cuid())
+  createdAt DateTime @default(now())
+  title String
+  desc String
+  img String?
+  price Decimal
+  isFeatured Boolean @default(false)
+  options Json[] // this is object array and this how is defined in the prisma docs
+  categorySlug String 
+  category Category @relation(fields: [categorySlug], references: [slug])
+ }
+
+ model Order {
+  id String  @id @default(cuid())
+  createdAt DateTime @default(now())
+  products Json[] // not Product[] because we are storing defferent data
+  status String
+  intent_id String? @unique
+ }
