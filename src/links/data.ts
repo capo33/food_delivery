@@ -1,13 +1,6 @@
-export interface Product {
-  id: number;
-  title: string;
-  desc?: string;
-  img?: string;
-  price: number;
-  options?: { title: string; additionalPrice: number }[];
-}
+import { ProductType } from "@/types/types";
 
-export const featuredProducts: Product[] = [
+export const featuredProducts: ProductType[] = [
   {
     id: 1,
     title: "Sicilian",
@@ -199,7 +192,7 @@ export const featuredProducts: Product[] = [
   },
 ];
 
-export const pizzas: Product[] = [
+export const pizzas: ProductType[] = [
   {
     id: 1,
     title: "Sicilian",
@@ -328,7 +321,7 @@ export const pizzas: Product[] = [
   },
 ];
 
-export const singleProduct: Product = {
+export const singleProduct: ProductType = {
   id: 1,
   title: "Sicilian",
   desc: "Ignite your taste buds with a fiery combination of spicy pepperoni, jalapeños, crushed red pepper flakes, and melted mozzarella cheese, delivering a kick with every bite.",

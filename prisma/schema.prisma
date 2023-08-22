@@ -15,6 +15,7 @@ model Category {
   createdAt DateTime @default(now())
   title String
   desc String
+  color String
   img String 
   slug String @unique
   products Product[] 

@@ -1,31 +1,57 @@
-import { pizzas } from '@/links/data'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import { pizzas } from "@/links/data";
+import { ProductType } from "@/types/types";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
-const CategoryPage = () => {
+// get single category
+const getCategory = async (category: string) => {
+  const response = await fetch(
+    `http://localhost:3000/api/product?category=${category}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch");
+  }
+
+  return response.json();
+};
+type CategoryProps = {
+  params: {
+    category: string;
+  };
+};
+
+const CategoryPage = async ({ params }: CategoryProps) => {
+  const products: ProductType[] = await getCategory(params.category);
   return (
-<div className="flex flex-wrap text-red-500">
-      {pizzas.map((item) => (
-        <Link className="w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between odd:bg-fuchsia-50" href={`/product/${item.id}`} key={item.id}>
+    <div className='flex flex-wrap text-red-500'>
+      {products.map((item) => (
+        <Link
+          className='w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between odd:bg-fuchsia-50'
+          href={`/product/${item.id}`}
+          key={item.id}
+        >
           {/* IMAGE CONTAINER */}
-          <h1 className="text-2xl uppercase p-2 text-center">{item.title}</h1>
+          <h1 className='text-2xl uppercase p-2 text-center'>{item.title}</h1>
 
           {item.img && (
-            <div className="relative h-[80%]">
-              <Image src={item.img} alt="" fill className="object-contain"/>
+            <div className='relative h-[80%]'>
+              <Image src={item.img} alt='' fill className='object-contain' />
             </div>
           )}
           {/* TEXT CONTAINER */}
-          <div className="flex items-center justify-between font-bold">
+          <div className='flex items-center justify-between font-bold'>
             {/* <h1 className="text-2xl uppercase p-2">{item.title}</h1> */}
-            <h2 className="text-xl">${item.price}</h2>
-            <button className="uppercase bg-red-500 text-white p-2 rounded-md">Add to Cart</button>
+            <h2 className='text-xl'>${item.price}</h2>
+            <button className='uppercase bg-red-500 text-white p-2 rounded-md'>
+              Add to Cart
+            </button>
           </div>
         </Link>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default CategoryPage
+export default CategoryPage;

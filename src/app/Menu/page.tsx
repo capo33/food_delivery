@@ -1,11 +1,26 @@
 import { menu } from "@/links/data";
+import { MenuType } from "@/types/types";
 import Link from "next/link";
 import React from "react";
 
-const MenuPage = () => {
+const getCategoriesData = async () => {
+  const response = await fetch("http://localhost:3000/api/categories", {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch");
+  }
+  return await response.json();
+};
+// this is a server side component so we can fetch the data directly
+// just we need turn a component into async component because we are going to fetch the data
+const MenuPage = async () => {
+  const categories: MenuType = await getCategoriesData();
+  
   return (
     <div className='p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col md:flex-row items-center'>
-      {menu.map((category) => (
+      {categories.map((category) => (
         <Link
           href={`/menu/${category.slug}`}
           key={category.id}
